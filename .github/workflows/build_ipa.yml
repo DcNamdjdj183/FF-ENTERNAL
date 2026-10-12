@@ -1,0 +1,47 @@
+name: Build IPA
+
+on:
+  push:
+    branches: [ "**" ]
+    tags: [ "v*" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: |
+          if ! command -v xcodegen &> /dev/null; then
+            brew install xcodegen
+          fi
+
+      - name: Generate Xcode Project
+        run: xcodegen generate
+
+      - name: Build archive
+        run: |
+          xcodebuild -project FFKernelCheat.xcodeproj \
+            -scheme FFKernelCheat \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath build/FFKernelCheat.xcarchive \
+            archive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Package IPA
+        run: |
+          mkdir -p build/Payload
+          cp -r build/FFKernelCheat.xcarchive/Products/Applications/FFKernelCheat.app build/Payload/
+          cd build && zip -qr FFKernelCheat.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FFKernelCheat-IPA
+          path: build/FFKernelCheat.ipa

@@ -1,0 +1,46 @@
+name: FFKernelCheat
+options:
+  bundleIdPrefix: com.dinhducnam
+  deploymentTarget:
+    iOS: "15.0"
+  xcodeVersion: "15.0"
+settings:
+  base:
+    IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+    SWIFT_VERSION: "5.0"
+    ENABLE_BITCODE: "NO"
+    CODE_SIGNING_REQUIRED: "NO"
+    CODE_SIGNING_ALLOWED: "NO"
+    CODE_SIGN_IDENTITY: ""
+targets:
+  FFKernelCheat:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: FFKernelCheat
+      - path: kexploit
+      - path: exploit
+    settings:
+      base:
+        PRODUCT_NAME: FFKernelCheat
+        PRODUCT_BUNDLE_IDENTIFIER: com.dinhducnam.ffkernelcheat
+        INFOPLIST_FILE: FFKernelCheat/Info.plist
+        SWIFT_OBJC_BRIDGING_HEADER: FFKernelCheat/Bridging-Header.h
+        HEADER_SEARCH_PATHS:
+          - $(inherited)
+          - $(SRCROOT)
+          - $(SRCROOT)/kexploit
+          - $(SRCROOT)/exploit
+        OTHER_LDFLAGS:
+          - $(inherited)
+          - -lz
+        ENABLE_BITCODE: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGN_IDENTITY: ""
+schemes:
+  FFKernelCheat:
+    build:
+      targets:
+        FFKernelCheat: all

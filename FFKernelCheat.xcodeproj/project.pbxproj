@@ -1,0 +1,11 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+		/* Minimal stub — replace with full project or generate via Xcode on Actions if needed */
+	};
+	rootObject = 000000000000000000000001 /* Project object */;
+}
