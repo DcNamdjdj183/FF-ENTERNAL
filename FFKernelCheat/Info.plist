@@ -31,6 +31,6 @@
         <string>UIInterfaceOrientationPortrait</string>
     </array>
     <key>MinimumOSVersion</key>
-    <string>15.0</string>
+    <string>16.0</string>
 </dict>
 </plist>

@@ -16,7 +16,7 @@ struct SettingsView: View {
                         Toggle("Auto Kernel Boot", isOn: $autoBoot)
                     }
                 }
-                .scrollContentBackground(.hidden)
+                .hideScrollContentBackground()
             }
             .navigationTitle("Settings")
         }
