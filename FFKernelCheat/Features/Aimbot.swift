@@ -12,12 +12,14 @@ final class Aimbot: ObservableObject {
     private init() {}
 
     func start() {
+        AppLogger.shared.info("Aimbot: Đã BẬT (FOV: \(Int(fov)), Smooth: \(Int(smoothness)))")
         timer = Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true) { [weak self] _ in
             self?.tick()
         }
     }
 
     func stop() {
+        AppLogger.shared.info("Aimbot: Đã TẮT")
         timer?.invalidate()
         timer = nil
     }
@@ -30,15 +32,14 @@ final class Aimbot: ObservableObject {
         var best: Entity?
         var bestDist: Float = fov
         for ent in EntityManager.shared.entities where !ent.isDead && ent.team != localTeam {
-            let dist = distance(ent.position, SIMD3(0,0,0)) // camera relative placeholder
+            let dist = distance(ent.position, SIMD3(0,0,0))
             if dist < bestDist {
                 bestDist = dist
                 best = ent
             }
         }
         guard let target = best else { return }
-        // Write rotation to local player aim
         let aimAddr = local + GameOffsets.aimTargetOffset
-        // KernelRW.shared.write(aimAddr, value: target.head)
+        _ = KernelRW.shared.write(aimAddr, value: target.head)
     }
 }

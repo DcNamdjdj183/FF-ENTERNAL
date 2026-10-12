@@ -19,6 +19,8 @@ struct ContentView: View {
                         .tabItem { Label("Home", systemImage: "house.fill") }
                     FeaturesView()
                         .tabItem { Label("Features", systemImage: "slider.horizontal.3") }
+                    LogsView()
+                        .tabItem { Label("Logs", systemImage: "terminal.fill") }
                     SettingsView()
                         .tabItem { Label("Settings", systemImage: "gear") }
                     AboutView()

@@ -10,6 +10,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         KernelManager.shared.pauseThreads()
     }
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        AppLogger.shared.info("Quay lại ứng dụng, tự động quét tìm game...")
+        KernelManager.shared.resolveGame()
+    }
+
     func applicationWillTerminate(_ application: UIApplication) {
         KernelManager.shared.killThreads()
     }

@@ -19,12 +19,14 @@ final class EntityManager: ObservableObject {
     private init() {}
 
     func startScan() {
+        AppLogger.shared.info("EntityManager: Bắt đầu luồng quét thực thể...")
         timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { [weak self] _ in
             self?.scan()
         }
     }
 
     func stopScan() {
+        AppLogger.shared.info("EntityManager: Dừng luồng quét thực thể.")
         timer?.invalidate()
         timer = nil
     }
